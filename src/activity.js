@@ -16,12 +16,32 @@ const createTask = () => {
   const newTask = {
     description: newTaskDescription.value,
     completed: false,
-    index: tasks.length,
+    index: tasks.length + 1,
   };
   newTaskDescription.value = '';
   tasks.push(newTask);
 
   saveItemToLocalStorage(tasks);
+};
+
+const updateTask = (taskId, el) => {
+  const tasks = getItemFromLocalStorage();
+  const task = tasks.find((task) => task.id === parseInt(taskId, 10));
+  if (el.hasAttribute('content-editatable')) {
+    task.description = el.textContent;
+  } else {
+    const span = el.nextElementSimbling;
+    const parent = el.closest('input');
+    task.isCompleted = !task.isCompleted;
+    if (task.isCompleted) {
+      span.removeAttribute('content-editable');
+      span.classList.add('complete');
+    } else {
+      span.setAttribute('content-editable', 'true');
+      parent.classList.remove('complete');
+    }
+  }
+  localStorage.setItem('task', JSON.stringify(this.tasks));
 };
 
 const deleteTask = (tasks, index) => {
@@ -46,4 +66,5 @@ export {
   getItemFromLocalStorage,
   deleteCompletedTasks,
   deleteTask,
+  updateTask,
 };

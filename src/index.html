@@ -4,16 +4,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <script src="https://kit.fontawesome.com/7415ea4535.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>To Do List</title>
 </head>
 <body>
   <div class="container">
     <div class="title">
-      <p>Today's To Do</p>
+      <p>Today's To Do <i class="fa-solid fa-rotate"></i></p>
     </div>
     <div class="to-do-task">
       <input id="to-do-input" type="text" placeholder="Add to your list....">
-      <button id="addBtn" type="submit">Add task</button>
+      <input id="addBtn" type="submit" value="+">
     </div>
     <ul id="to-do-list" class="to-do-list"></ul>
     <button id="clear-completed" class="clear-completed" clear-list-btn>Clear all completed</button>

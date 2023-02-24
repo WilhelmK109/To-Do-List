@@ -52,9 +52,9 @@ const displayTasks = () => {
 
     const deleteBtn = document.createElement('button');
     deleteBtn.className = 'delete-btn';
-    deleteBtn.innerHTML = 'delete';
-    deleteBtn.addEventListener('click', () => {
-      deleteTask(tasks, index);
+    deleteBtn.innerHTML = ':';
+    deleteBtn.addEventListener('onclick', () => {
+      deleteTask();
       displayTasks();
     });
     anotherItem.appendChild(deleteBtn);
