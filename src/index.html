@@ -7,16 +7,16 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="to-do-list-div">
+  <div class="container">
     <div class="title">
       <p>Today's To Do</p>
     </div>
-    <ul id="to-do-list" class="to-do-list">
-      <li class="list-item">
-        <input type="text" placeholder="Add to your list....">
-      </li>
-    </ul>
-    <button>Clear all completed</button>
+    <div class="to-do-task">
+      <input id="to-do-input" type="text" placeholder="Add to your list....">
+      <button id="addBtn" type="submit">Add task</button>
+    </div>
+    <ul id="to-do-list" class="to-do-list"></ul>
+    <button id="clear-completed" class="clear-completed" clear-list-btn>Clear all completed</button>
   </div>
 </body>
 </html>
