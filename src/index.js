@@ -72,7 +72,7 @@ const displayTasks = () => {
 
     const anotherDelBtn = document.createElement('span');
     anotherDelBtn.className = 'material-symbols-outlined';
-    anotherDelBtn.innerHTML = 'delete';
+    anotherDelBtn.innerHTML = 'edit';
     anotherDelBtn.addEventListener('click', () => {
       anotherDelBtn.className = 'invisible';
       deleteBtn.className = 'material-symbols-outlined';
