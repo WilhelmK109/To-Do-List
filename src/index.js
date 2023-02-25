@@ -5,6 +5,7 @@ import {
   getItemFromLocalStorage,
   deleteCompletedTasks,
   deleteTask,
+  updateTask,
 } from './activity.js';
 
 const displayTasks = () => {
@@ -13,7 +14,7 @@ const displayTasks = () => {
   toDoList.innerHTML = '';
   tasks.forEach((task, index) => {
     const toDoItem = document.createElement('li');
-    toDoItem.className = ('to-do-item-list');
+    toDoItem.className = ('to-do-task');
 
     const anotherItem = document.createElement('div');
     anotherItem.className = 'another-item';
@@ -25,7 +26,7 @@ const displayTasks = () => {
       taskInput.setAttribute('checked', '');
     }
 
-    taskInput.onclick = (e) => {
+    taskInput.onchange = (e) => {
       if (e.target.checked) {
         tasks[index].completed = true;
         e.target.parentNode.children[1].classList.add('strike-through');
@@ -46,18 +47,42 @@ const displayTasks = () => {
       taskDescription.classList.remove('strike-through');
     }
     taskDescription.innerText = task.description;
-
     anotherItem.appendChild(taskDescription);
-    toDoItem.appendChild(anotherItem);
 
-    const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'delete-btn';
-    deleteBtn.innerHTML = ':';
-    deleteBtn.addEventListener('onclick', () => {
-      deleteTask();
+    const editTaskInput = document.createElement('input');
+    editTaskInput.className = 'invisible';
+    editTaskInput.type = 'text';
+    editTaskInput.value = task.description;
+    editTaskInput.addEventListener('focusout', (e) => {
+      toDoItem.classList.toggle('set-focus-bg');
+      updateTask(tasks, index, e.target.value);
       displayTasks();
     });
-    anotherItem.appendChild(deleteBtn);
+    anotherItem.appendChild(editTaskInput);
+    toDoItem.appendChild(anotherItem);
+
+    const deleteBtn = document.createElement('span');
+    deleteBtn.className = 'invisible';
+    deleteBtn.innerHTML = 'delete';
+    deleteBtn.addEventListener('click', () => {
+      deleteTask(tasks, index);
+      displayTasks();
+    });
+    toDoItem.appendChild(deleteBtn);
+
+    const anotherDelBtn = document.createElement('span');
+    anotherDelBtn.className = 'material-symbols-outlined';
+    anotherDelBtn.innerHTML = 'delete';
+    anotherDelBtn.addEventListener('click', () => {
+      anotherDelBtn.className = 'invisible';
+      deleteBtn.className = 'material-symbols-outlined';
+
+      taskDescription.className = 'invisible';
+      editTaskInput.className = 'visible';
+      toDoItem.classList.toggle('set-focus-bg');
+      editTaskInput.focus();
+    });
+    toDoItem.appendChild(anotherDelBtn);
     toDoList.appendChild(toDoItem);
 
     const clearListBtn = document.querySelector('[clear-list-btn');
@@ -69,7 +94,7 @@ const displayTasks = () => {
 };
 
 window.addEventListener('load', () => {
-  const createNewTask = document.getElementById('addBtn');
+  const createNewTask = document.getElementById('add-new-task');
   createNewTask.addEventListener('click', () => {
     createTask();
     displayTasks();

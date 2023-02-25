@@ -9,7 +9,7 @@ body {
   font-family: "Lato", sans-serif;
   display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
 }
 
 .container {
@@ -39,12 +39,22 @@ body {
   padding: 0% 18px;
 }
 
-.to-do-task {
+.to-do-task-div {
   display: flex;
-  width: 60%;
+  padding-left: 15px;
   justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+  width: 60%;
   background-color: #fff;
   font-size: 14px;
+}
+
+input[type=text] {
+  border: none;
+  outline: none;
+  background-color: inherit;
+  width: 100%;
 }
 
 #to-do-input {
@@ -54,17 +64,19 @@ body {
   border-bottom: 1px solid lightgray;
 }
 
+.material-symbols-outlined {
+  width: 10%;
+}
+
 i {
   color: rgb(83, 100, 55);
 }
 
-#addBtn {
-  width: 10%;
+#add-new-task {
   font-size: x-large;
   background: #fff;
   color: lightgray;
   border: none;
-  border-bottom: 1px solid lightgray;
   cursor: pointer;
 }
 
@@ -78,20 +90,33 @@ i {
 }
 
 .to-do-list {
-  background: #fff;
   list-style: none;
+  background-color: #fff;
   width: 60%;
 }
 
 .another-item {
+  padding: 12px;
   display: flex;
+  flex: 2;
+  width: 90%;
+}
+
+.to-do-task {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  margin: 0%;
-  border: none;
   border-bottom: 1px solid lightgray;
-  overflow-x: hidden;
   width: 100%;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.to-do-task > span {
+  cursor: pointer;
+  color: lightgray;
+  flex: 0.1;
+  width: 10%;
 }
 
 .checkbox {
@@ -135,8 +160,13 @@ i {
   border-bottom: 2px solid lightgray;
 }
 
-.to-do-item-list > .checkbox {
+.another-item > .checkbox {
   margin-right: 10px;
+}
+
+.to-do-input:active {
+  border: none;
+  outline: none;
 }
 
 .clear-completed {
@@ -159,10 +189,15 @@ button:hover {
   color: #808080;
 }
 
-.display-none {
+.set-focus-bg {
+  background-color: rgb(241, 241, 180);
+  display: flex;
+}
+
+.invisible {
   display: none;
 }
 
-.hide {
-  background-color: rgb(241, 241, 181);
+.visible {
+  display: flex;
 }

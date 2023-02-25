@@ -20,34 +20,19 @@ const createTask = () => {
   };
   newTaskDescription.value = '';
   tasks.push(newTask);
-
   saveItemToLocalStorage(tasks);
 };
 
-const updateTask = (taskId, el) => {
-  const tasks = getItemFromLocalStorage();
-  const task = tasks.find((task) => task.id === parseInt(taskId, 10));
-  if (el.hasAttribute('content-editatable')) {
-    task.description = el.textContent;
-  } else {
-    const span = el.nextElementSimbling;
-    const parent = el.closest('input');
-    task.isCompleted = !task.isCompleted;
-    if (task.isCompleted) {
-      span.removeAttribute('content-editable');
-      span.classList.add('complete');
-    } else {
-      span.setAttribute('content-editable', 'true');
-      parent.classList.remove('complete');
-    }
-  }
-  localStorage.setItem('task', JSON.stringify(this.tasks));
+const updateTask = (tasks, index, value) => {
+  tasks[index].description = value;
+
+  saveItemToLocalStorage(tasks);
 };
 
 const deleteTask = (tasks, index) => {
   const newTasks = tasks.filter((task, innerIndex) => index !== innerIndex);
   for (let i = 0; i < newTasks.length; i += 1) {
-    newTasks[i].index = tasks.length;
+    newTasks[i].index = i;
   }
   saveItemToLocalStorage(newTasks);
 };
