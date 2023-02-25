@@ -1,14 +1,4 @@
-const getItemFromLocalStorage = () => {
-  let data = JSON.parse(localStorage.getItem('tasks'));
-  if (!data) {
-    data = [];
-  }
-  return data;
-};
-
-const saveItemToLocalStorage = (tasks) => {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-};
+import { getItemFromLocalStorage, saveItemToLocalStorage } from './storage.js';
 
 const createTask = () => {
   const tasks = getItemFromLocalStorage();
@@ -61,10 +51,5 @@ const deleteCompletedTasks = (tasks) => {
 };
 
 export {
-  createTask,
-  saveItemToLocalStorage,
-  getItemFromLocalStorage,
-  deleteCompletedTasks,
-  deleteTask,
-  updateTask,
+  createTask, deleteCompletedTasks, deleteTask, updateTask,
 };

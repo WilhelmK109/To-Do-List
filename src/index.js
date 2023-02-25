@@ -1,12 +1,15 @@
 import './style.css';
 import {
   createTask,
-  saveItemToLocalStorage,
-  getItemFromLocalStorage,
   deleteCompletedTasks,
   deleteTask,
   updateTask,
-} from './activity.js';
+} from './modules/activity.js';
+
+import {
+  saveItemToLocalStorage,
+  getItemFromLocalStorage,
+} from './modules/storage.js';
 
 const displayTasks = () => {
   const tasks = getItemFromLocalStorage();
@@ -22,7 +25,7 @@ const displayTasks = () => {
     const taskInput = document.createElement('input');
     taskInput.className = 'checkbox';
     taskInput.type = 'checkbox';
-    if (task.completeted) {
+    if (task.completed) {
       taskInput.setAttribute('checked', '');
     }
 
@@ -53,10 +56,12 @@ const displayTasks = () => {
     editTaskInput.className = 'invisible';
     editTaskInput.type = 'text';
     editTaskInput.value = task.description;
-    editTaskInput.addEventListener('focusout', (e) => {
-      toDoItem.classList.toggle('set-focus-bg');
-      updateTask(tasks, index, e.target.value);
-      displayTasks();
+    editTaskInput.addEventListener('keypress', (e) => {
+      if (e.keycode === 13) {
+        toDoItem.classList.toggle('set-focus-bg');
+        updateTask(tasks, index, e.target.value);
+        displayTasks();
+      }
     });
     anotherItem.appendChild(editTaskInput);
     toDoItem.appendChild(anotherItem);
@@ -100,8 +105,8 @@ window.addEventListener('load', () => {
     displayTasks();
   });
 
-  const todoInput = document.getElementById('to-do-input');
-  todoInput.addEventListener('keypress', (e) => {
+  const taskInput = document.getElementById('to-do-input');
+  taskInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       createTask();
       displayTasks();
