@@ -25,7 +25,7 @@ const displayTasks = () => {
     const taskInput = document.createElement('input');
     taskInput.className = 'checkbox';
     taskInput.type = 'checkbox';
-    if (task.completeted) {
+    if (task.completed) {
       taskInput.setAttribute('checked', '');
     }
 
